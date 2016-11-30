@@ -1,34 +1,35 @@
-module.exports = {
-
-dataTypes: function(data){
-	if( Array.isArray(data)){
-		if(data.length > 2){
-            return data[2];
-        }else{
+module.exports = function dataTypes (arg) {
+  if (typeof arg === "string"){
+    return arg.length;
+  }
+  if ((typeof arg === null) || ( arg === undefined )){
+    return "no value";
+  }
+  if (typeof arg === "boolean"){
+    return arg;
+  }
+  if (typeof arg === "number"){
+    if (arg < 100) {
+      return ("less than 100");
+    }
+    else if (arg > 100){
+      return ("more than 100");
+    }
+    else{
+      return ("equal to 100");
+    }
+  }
+    if ( arg instanceof Array){
+        if (arg.length < 3){
             return undefined;
         }
-	}
-	if(typeof (data) === 'string'){
-		return data.length;
-	}
-	if(typeof (data) === 'object' || typeof(data) === 'undefined'){
-		return 'no value';
-	}
-	if(typeof (data) === 'boolean'){
-		return data;
-	}
-	if(typeof (data) === 'number' && data < 100){
-		return 'less than 100';
-	}
-	if(typeof (data) === 'number' && data === 100){
-		return 'equal to 100';
-	}
-	if(typeof (data) === 'number' && data > 100){
-		return 'more than 100';
-	}
-	if(typeof (data) === 'function'){
-		return data(true);	
-	}
-	
+        else {
+            return arg[2];        
+        }  
+    }
+
+    if ( typeof arg === "function"){
+            return arg(true);
+        }
 }
-}
+  
